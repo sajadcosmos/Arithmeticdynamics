@@ -1,0 +1,22 @@
+cff-version: 1.2.0
+message: "If you use this formalisation, please cite it as below."
+title: "ArithmeticDynamics: Lean 4 formalisation of 'Arithmetic dynamics on unitary Cayley and GCD graphs: exact consensus rates and twisted states from Ramanujan sums'"
+authors:
+  - family-names: Sheikh
+    given-names: Sajad A.
+    affiliation: "Department of Mathematics, University of Kashmir, South Campus, Anantnag, 192101, Jammu and Kashmir, India"
+    email: sajadsheikh@uok.edu.in
+version: 1.0.0
+date-released: 2026-11-11
+license: Apache-2.0
+repository-code: "https://github.com/sajadcosmos/Arithmeticdynamics"
+keywords:
+  - Lean 4
+  - Mathlib
+  - formal verification
+  - unitary Cayley graph
+  - gcd graph
+  - Ramanujan sum
+  - consensus
+  - Kuramoto model
+  - spectral graph theory

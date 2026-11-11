@@ -1,0 +1,125 @@
+# Arithmetic dynamics on unitary Cayley and GCD graphs — Lean 4 formalisation
+
+[![Lean build](https://github.com/sajadcosmos/Arithmeticdynamics/actions/workflows/build.yml/badge.svg)](https://github.com/sajadcosmos/Arithmeticdynamics/actions/workflows/build.yml)
+
+Machine-checked proofs, in Lean 4 with Mathlib, for the paper
+
+> **Sajad A. Sheikh**, *Arithmetic dynamics on unitary Cayley and GCD graphs: exact consensus
+> rates and twisted states from Ramanujan sums* (2026). PDF: [`paper/arithmetic_dynamics.pdf`](paper/arithmetic_dynamics.pdf)
+
+Except for three classical theorems from the stability theory of ordinary differential equations,
+which are used as explicit assumptions (see below), **every result of the paper is formalised**.
+
+| | |
+|---|---|
+| Theorems | 312 |
+| Lines | ≈ 5 400 in 19 files (plus a single-file version) |
+| `sorry` | none |
+| Axioms | only `propext`, `Classical.choice`, `Quot.sound` |
+| Toolchain | Lean `v4.36.0-rc2`, Mathlib commit `2ddf59c8f142` (pinned) |
+
+## The mathematics in brief
+
+The unitary Cayley graph `X_n` has vertex set `ℤ/n`, with `a ∼ b` when `a − b` is a unit. Its
+eigenvalues are Ramanujan sums. Let `p < q` be the two smallest prime divisors of `n`.
+
+* **Spectrum.** `λ_max = φ(n)·p/(p−1)` and `λ₂ = φ(n)(1 − 1/((p−1)(q−1)))`, with exact
+  multiplicities (Hölder's formula for Ramanujan sums is proved from scratch).
+* **Consensus.** The optimal constant-step consensus rate is `q / (2(p−1)(q−1) + q − 2)`
+  (`1/(2p−1)` for `n = p^a`, `a ≥ 2`; `0` for `n` prime). It never exceeds `3/5`, with equality
+  exactly when `6 ∣ n`. Its mean value over all `n` exists and equals the series (4.7) of the paper.
+* **Kuramoto model.** A twisted state whose twist has additive order `M` is linearly stable if
+  `M = 6`, has vanishing Jacobian if `M = 4`, and is unstable otherwise. Stable non-synchronous
+  twisted states exist iff `6 ∣ n`, and they attract at half the rate of synchrony. The quarter
+  twists are not minima of the energy.
+* **GCD graphs.** General circulant stability criteria, stability of the hexagonal state when all
+  divisors in `D` are coprime to `6`, integrality of the spectrum, and rationality of the rate.
+
+## Scope and assumptions
+
+Formalised: every theorem, lemma, proposition and corollary of Sections 3–6, the identities
+(2.2)–(2.5) they rest on, and every mathematical assertion made in the remarks. Outside the
+formalisation: the numerical computations of Section 7 and the decimal value `ρ̄ ≈ 0.2758`.
+
+Three classical theorems enter as **explicit hypotheses**, never as axioms. Each is a `Prop`
+(file `ArithmeticDynamics/Nonlinear.lean`) quantifying over *every* `C¹`, globally Lipschitz
+vector field on `ℝ^{ℤ/n}`, so each is an instance of a textbook theorem, not a statement tailored
+to the Kuramoto model.
+
+| Lean name | Classical theorem | Used for |
+|---|---|---|
+| `LyapunovIndirectStability` | Lyapunov's indirect method, stability form, on an invariant level set (Khalil, *Nonlinear Systems*, Thm 4.7) | Thm 5.5, Prop 6.2 |
+| `LyapunovIndirectInstability` | Lyapunov's instability theorem by linearisation (ibid.) | Thm 5.4(c), Prop 6.1(i) |
+| `AbsilKurdyka` | Absil–Kurdyka (2006): stable equilibria of analytic gradient flows are local minima | Thm 5.6(iii) |
+
+Everything these theorems require about the Kuramoto system is proved: the field is `C¹`,
+globally Lipschitz and of zero sum; twisted states are equilibria; its Fréchet derivative at
+twisted states; analyticity of the energy; and `F = −∇E`.
+
+## Build
+
+Requires [elan](https://github.com/leanprover/elan).
+
+```bash
+git clone https://github.com/sajadcosmos/Arithmeticdynamics.git
+cd Arithmeticdynamics
+lake exe cache get        # download prebuilt Mathlib
+lake build                # build all 19 files
+lake env lean AxiomCheck.lean   # print the axioms of all 312 theorems
+```
+
+**Single file.** [`ArithmeticDynamicsAll.lean`](ArithmeticDynamicsAll.lean) contains the whole
+development with `import Mathlib` as its only import. It can be compiled with
+`lake env lean ArithmeticDynamicsAll.lean`, or pasted into
+[live.lean-lang.org](https://live.lean-lang.org). The online editor may use a newer Mathlib, in
+which case a renamed lemma can need a one-line fix.
+
+## Files
+
+| File | Content | Paper |
+|---|---|---|
+| `Consensus` | optimal-step lemma, rate identities, the 3/5 inequality | Lemma 4.1, Thm 4.3, Cor 4.5 |
+| `Kuramoto` | trigonometric identities | Lemma 5.2, Thms 5.5, 5.6 |
+| `Arithmetic` | `minFac n − 1 ≤ φ(M)` | Lemma 3.1 |
+| `Extremal` | `r = μ/φ`, its bounds on divisors, the exponent `g` | Lemmas 3.1, 5.3 |
+| `Ramanujan` | Ramanujan sums and Hölder's formula | (2.3) |
+| `Spectrum` | `X_n` as a `SimpleGraph`, Laplacian spectrum, extreme eigenvalues | (2.4), Thm 3.2 |
+| `Twisted` | Kuramoto field, twisted equilibria, Jacobian spectrum | Lemma 5.2, Thms 5.5, 5.6(i) |
+| `Classification` | classification of twisted states, completeness of the spectrum | Thm 5.4, Prop 4.7 |
+| `Rates` | two smallest primes, `IsRate`, the 3/5 bound with equality case | Thm 4.3, Cor 4.5 |
+| `Fourier` | character orthogonality, Plancherel, Laplacian as Fourier multiplier | used throughout |
+| `Multiplicity` | equality cases, exact multiplicities, spectral ratio | Lemma 3.1, Thm 3.2, Cor 3.3 |
+| `ConsensusDynamics` | discrete and continuous norm estimates, optimal steps, natural step | Thm 4.3, Cor 4.5, Prop 4.7, Remark 4.8 |
+| `Density` | mean of periodic sequences, counting via the Chinese remainder theorem | Prop 4.9 |
+| `MeanValue` | densities of `A_{p,q}`, the exceptional set, the mean value | Prop 4.9 |
+| `Energy` | energy, gradient structure, regularity, quarter-twist energy formula | Thm 5.6(i)(ii) |
+| `Nonlinear` | the classical hypotheses, exponential stability, instability | Thms 5.4–5.6, Cor 5.7 |
+| `Circulant` | general circulants, Dirichlet form, Fourier symbol | (2.2), Prop 6.1 |
+| `GcdGraph` | gcd graphs, equation (2.5), integrality, rational rate | Props 6.2, 6.3 |
+| `Remarks` | set of values, parity bounds, totient bound, phase lags | Remarks 4.4, 5.8, 5.9, 6.4 |
+
+## Headline theorems
+
+```lean
+theorem ramanujan_eq (j : ZMod n) :
+    ramanujan n j = (Nat.totient n : ℂ) * ((r (addOrderOf j) : ℝ) : ℂ)
+
+theorem rate_le_and_eq_iff (hn : 2 ≤ n) (h : IsRate n ρ) : ρ ≤ 3 / 5 ∧ (ρ = 3 / 5 ↔ 6 ∣ n)
+
+theorem mean_value :
+    Summable pairWeight ∧
+      Tendsto (fun N : ℕ => (∑ m ∈ range N, rhoStar m) / N) atTop (𝓝 meanRate)
+
+theorem linearly_stable_iff (hK : 0 < K) (hm : m ≠ 0) :
+    (∀ k ≠ 0, ∃ ev < 0, ∀ i, jac n K m (chi n k) i = ev * chi n k i) ↔ addOrderOf m = 6
+```
+
+(Signatures abbreviated; see the source for the exact statements.)
+
+## Citing
+
+Please cite the paper and this repository; see [`CITATION.cff`](CITATION.cff).
+
+## Licence
+
+Apache License 2.0, the same licence as Mathlib. See [`LICENSE`](LICENSE).
