@@ -6,7 +6,8 @@ authors:
     given-names: Sajad A.
     affiliation: "Department of Mathematics, University of Kashmir, South Campus, Anantnag, 192101, Jammu and Kashmir, India"
     email: sajadsheikh@uok.edu.in
-version: 1.0.0
+version: "1.0"
+doi: 10.5281/zenodo.24127127
 date-released: 2026-11-11
 license: Apache-2.0
 repository-code: "https://github.com/sajadcosmos/Arithmeticdynamics"

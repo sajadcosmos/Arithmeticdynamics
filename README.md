@@ -1,6 +1,7 @@
 # Arithmetic dynamics on unitary Cayley and GCD graphs — Lean 4 formalisation
 
 [![Lean build](https://github.com/sajadcosmos/Arithmeticdynamics/actions/workflows/build.yml/badge.svg)](https://github.com/sajadcosmos/Arithmeticdynamics/actions/workflows/build.yml)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.24127127.svg)](https://doi.org/10.5281/zenodo.24127127)
 
 Machine-checked proofs, in Lean 4 with Mathlib, for the paper
 
@@ -118,7 +119,9 @@ theorem linearly_stable_iff (hK : 0 < K) (hm : m ≠ 0) :
 
 ## Citing
 
-Please cite the paper and this repository; see [`CITATION.cff`](CITATION.cff).
+Please cite the paper and this repository; see [`CITATION.cff`](CITATION.cff). The version accompanying
+the paper is [release v1.0](https://github.com/sajadcosmos/Arithmeticdynamics/releases/tag/v1.0),
+archived on Zenodo as [doi:10.5281/zenodo.24127127](https://doi.org/10.5281/zenodo.24127127).
 
 ## Licence
 
