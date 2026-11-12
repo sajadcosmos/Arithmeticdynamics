@@ -8,7 +8,11 @@ authors:
     email: sajadsheikh@uok.edu.in
 version: "1.1"
 date-released: 2026-11-12
+doi: 10.5281/zenodo.24164532
 identifiers:
+  - type: doi
+    value: 10.5281/zenodo.24164532
+    description: "Zenodo archive of release v1.1"
   - type: doi
     value: 10.5281/zenodo.24127127
     description: "Zenodo archive of release v1.0"
