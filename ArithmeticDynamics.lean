@@ -17,3 +17,4 @@ import ArithmeticDynamics.Nonlinear
 import ArithmeticDynamics.Circulant
 import ArithmeticDynamics.GcdGraph
 import ArithmeticDynamics.Remarks
+import ArithmeticDynamics.GcdConsensus

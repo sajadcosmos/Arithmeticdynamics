@@ -2,7 +2,7 @@
 Arithmetic Dynamics on Unitary Cayley and GCD Graphs
 Part XVIII: gcd graphs `X_n(D)` — symmetry, the hexagonal state (Proposition 6.2), the
 decomposition (2.5) of the symbol into Ramanujan sums, integrality of the spectrum and the
-rationality of the consensus rate (Proposition 6.3).
+rationality of the consensus rate (Proposition 6.4).
 -/
 import Mathlib
 import ArithmeticDynamics.Circulant
@@ -167,7 +167,7 @@ theorem gcd_sync_expStable (hL : LyapunovIndirectStability n) {D : Finset ℕ}
     field_simp
   linarith
 
-/-! ### Equation (2.5) and Proposition 6.3 -/
+/-! ### Equation (2.5) and Proposition 6.4 -/
 
 /-- **Equation (2.5).**  For `d ∣ n`, the sum of `e(ks/n)` over `gcd(s, n) = d` is the Ramanujan
 sum `c_{n/d}(k)`. -/
@@ -279,9 +279,12 @@ theorem cSym_gcd_int (D : Finset ℕ) (k : ZMod n) : ∃ z : ℤ, cSym (gcdSet n
   push_cast at h
   exact_mod_cast h
 
-/-- **Proposition 6.3.**  On a connected gcd graph `X_n(D)`, with `C⁺ = max_{k≠0} C(k)` and
-`C⁻ = min_{k≠0} C(k)`, the extreme Laplacian eigenvalues are `λ₂ = |S| - C⁺` and
-`λ_max = |S| - C⁻`, the optimal rate is `(C⁺ - C⁻)/(2|S| - C⁺ - C⁻)`, and it is rational. -/
+/-- **Extreme eigenvalues of a gcd graph** (used in Proposition 6.4).  For every gcd graph
+`X_n(D)`, `n ≥ 2`, with `C⁺ = max_{k≠0} C(k)` and `C⁻ = min_{k≠0} C(k)`, every non-trivial
+Laplacian eigenvalue `|S| - C(k)` lies in `[|S| - C⁺, |S| - C⁻]`, both ends are attained, the
+quotient `(λ_max - λ₂)/(λ_max + λ₂)` equals `(C⁺ - C⁻)/(2|S| - C⁺ - C⁻)`, and this number is
+rational.  No connectivity is assumed here; the dynamical statements, which do need it, are
+`gcd_consensus` (connected) and `gcd_no_consensus` (disconnected) in `GcdConsensus.lean`. -/
 theorem gcd_rate (D : Finset ℕ) (hn : 1 < n) :
     let S := gcdSet n D
     let ne : (univ.erase (0 : ZMod n)).Nonempty :=

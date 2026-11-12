@@ -156,6 +156,45 @@ theorem sync_expStable (hL : LyapunovIndirectStability n) {K : ℝ} (hK : 0 < K)
       rw [this]
       exact quad_sync hK.le w hw) r' hr' hr
 
+/-! ### Theorem 5.5: the second hexagonal state `m = 5n/6` -/
+
+omit [NeZero n] in
+theorem natCast_five_sixth (h6 : 6 ∣ n) :
+    ((5 * (n / 6) : ℕ) : ZMod n) = -((n / 6 : ℕ) : ZMod n) := by
+  rw [eq_neg_iff_add_eq_zero, ← Nat.cast_add]
+  have e : 5 * (n / 6) + n / 6 = n := by omega
+  rw [e, ZMod.natCast_self]
+
+/-- At the hexagonal state `m = 5n/6` every edge weight is again `1/2`. -/
+theorem twistWeight_hex_five (h6 : 6 ∣ n) (u : (ZMod n)ˣ) :
+    twistWeight n ((5 * (n / 6) : ℕ) : ZMod n) u = 1 / 2 := by
+  rw [natCast_five_sixth h6, twistWeight_neg, twistWeight_hex h6]
+
+/-- **Theorem 5.5 for `m = 5n/6`.**  The Jacobian at `m = 5n/6` equals the Jacobian at `m = n/6`,
+namely `-(K/(2φ(n)))` times the Laplacian of `X_n`. -/
+theorem jac_hex_five (h6 : 6 ∣ n) (K : ℝ) (f : ZMod n → ℂ) (i : ZMod n) :
+    jac n K ((5 * (n / 6) : ℕ) : ZMod n) f i
+      = -((K / (2 * (Nat.totient n : ℝ)) : ℝ) : ℂ) * lap n f i := by
+  rw [← jac_hex h6]
+  unfold jac
+  simp only [twistWeight_hex_five h6, twistWeight_hex h6]
+
+/-- **Theorem 5.5 for `m = 5n/6`.**  For `6 ∣ n` the hexagonal state `θ_j = -jπ/3` (that is,
+`m = 5n/6`) is exponentially stable modulo rotation with every rate `r' < K/4`. -/
+theorem hex_expStable_five (hL : LyapunovIndirectStability n) (h6 : 6 ∣ n) {K : ℝ} (hK : 0 < K)
+    {r' : ℝ} (hr' : 0 < r') (hr : r' < K / 4) :
+    ExpStableOnLevel (kuramotoField n K) (twisted n (5 * (n / 6))) r' := by
+  have hJ : ∀ (f : ZMod n → ℝ) (i : ZMod n),
+      jacR K ((5 * (n / 6) : ℕ) : ZMod n) f i = jacR K ((n / 6 : ℕ) : ZMod n) f i := by
+    intro f i
+    unfold jacR
+    simp only [twistWeight_hex_five h6, twistWeight_hex h6]
+  exact hL _ _ (K / 4) (contDiff_kuramotoField K) (lipschitz_kuramotoField K)
+    (kuramotoField_twisted_eq K _) (sum_kuramotoField K) (by positivity)
+    (fun w hw => by
+      simp_rw [fderiv_kuramotoField_twisted, hJ]
+      exact quad_hex h6 hK.le w hw) r' hr' hr
+
 /-! ### Theorem 5.5: the linear rates are exact -/
 
 omit [NeZero n] in

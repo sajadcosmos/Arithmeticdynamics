@@ -190,16 +190,19 @@ theorem r_eq_zero_of_four_dvd {M : ℕ} (h : 4 ∣ M) : r M = 0 := by
     norm_num at this
   simp [r, moebius_eq_zero_of_not_squarefree hns]
 
+/-- **Lemma 5.3.**  `g(2) = 2`. -/
 theorem g_two : g 2 = 2 := by
   have h : 2 / Nat.gcd 2 2 = 1 := by norm_num
   rw [g, h, r_one, r_two]
   norm_num
 
+/-- **Lemma 5.3.**  `g(4) = 0`. -/
 theorem g_four : g 4 = 0 := by
   have h : 4 / Nat.gcd 2 4 = 2 := by norm_num
   rw [g, h, r_two, r_eq_zero_of_four_dvd (dvd_refl 4)]
   norm_num
 
+/-- **Lemma 5.3.**  `g(6) = -1/4`. -/
 theorem g_six : g 6 = -1 / 4 := by
   have h : 6 / Nat.gcd 2 6 = 3 := by norm_num
   rw [g, h, r_three, r_six]

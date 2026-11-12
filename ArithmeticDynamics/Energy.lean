@@ -138,6 +138,8 @@ theorem analyticAt_energy (K : ℝ) (x : ZMod n → ℝ) : AnalyticAt ℝ (energ
 noncomputable def jacR (K : ℝ) (m : ZMod n) (f : ZMod n → ℝ) (i : ZMod n) : ℝ :=
   K / (Nat.totient n : ℝ) * ∑ u : (ZMod n)ˣ, twistWeight n m u * (f (i + u) - f i)
 
+/-- **Lemma 5.2 (ii).**  The Fréchet derivative of the Kuramoto field on `X_n`:
+`(DF(θ) f)_i = (K/φ(n)) ∑_u cos(θ_{i+u} - θ_i)(f_{i+u} - f_i)`. -/
 theorem fderiv_kuramotoField (K : ℝ) (θ f : ZMod n → ℝ) (i : ZMod n) :
     fderiv ℝ (kuramotoField n K) θ f i
       = K / (Nat.totient n : ℝ) * ∑ u : (ZMod n)ˣ, cos (θ (i + u) - θ i) * (f (i + u) - f i) := by

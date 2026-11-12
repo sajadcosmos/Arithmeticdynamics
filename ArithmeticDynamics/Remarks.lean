@@ -1,8 +1,8 @@
 /-
 Arithmetic Dynamics on Unitary Cayley and GCD Graphs
-Part XIX: the mathematical content of the remarks — the set of values of `ρ*` (Remark 4.4),
+Part XIX: the mathematical content of the remarks — the set of values of `ρ*` (Remark 4.6),
 the phase lags at hexagonal states (Remarks 5.8 and 6.4), the density bound (Remark 5.9),
-and the quarter twists on gcd graphs (Remark 6.4).
+and the quarter twists on gcd graphs (Remark 6.3).
 -/
 import Mathlib
 import ArithmeticDynamics.GcdGraph
@@ -11,7 +11,7 @@ namespace ArithmeticDynamics
 
 open Finset Real Filter Topology ArithmeticFunction
 
-/-! ### Remark 4.4: the set of values of the optimal rate -/
+/-! ### Remark 4.6: the set of values of the optimal rate -/
 
 /-- For fixed `p`, the rate `q/(2(p-1)(q-1)+q-2)` is strictly decreasing in `q`. -/
 theorem rate_strictAnti_q {p q₁ q₂ : ℝ} (hp : 2 ≤ p) (hq : 3 ≤ q₁) (hlt : q₁ < q₂) :
@@ -47,7 +47,7 @@ theorem rate_prime_pow_tendsto : Tendsto (fun p : ℝ => 1 / (2 * p - 1)) atTop 
   refine this.inv_tendsto_atTop.congr fun p => ?_
   simp [one_div]
 
-/-- **Remark 4.4, even moduli.**  For even `n > 2`, `1/3 ≤ ρ*(X_n) ≤ 3/5`. -/
+/-- **Remark 4.6, even moduli.**  For even `n > 2`, `1/3 ≤ ρ*(X_n) ≤ 3/5`. -/
 theorem rate_even {m : ℕ} (hm : 2 < m) (heven : 2 ∣ m) {ρ : ℝ} (h : IsRate m ρ) :
     1 / 3 ≤ ρ ∧ ρ ≤ 3 / 5 := by
   refine ⟨?_, (rate_le_and_eq_iff hm.le h).1⟩
@@ -74,7 +74,7 @@ theorem rate_even {m : ℕ} (hm : 2 < m) (heven : 2 ∣ m) {ρ : ℝ} (h : IsRat
     push_cast
     linarith
 
-/-- **Remark 4.4, odd moduli.**  For odd `n ≥ 3`, `ρ*(X_n) ≤ 5/19`, with equality iff `15 ∣ n`. -/
+/-- **Remark 4.6, odd moduli.**  For odd `n ≥ 3`, `ρ*(X_n) ≤ 5/19`, with equality iff `15 ∣ n`. -/
 theorem rate_odd {m : ℕ} (hm : 2 ≤ m) (hodd : ¬ 2 ∣ m) {ρ : ℝ} (h : IsRate m ρ) :
     ρ ≤ 5 / 19 ∧ (ρ = 5 / 19 ↔ 15 ∣ m) := by
   have hmin3 : 3 ≤ m.minFac := by
@@ -244,7 +244,7 @@ theorem cos_hex_cases (s : ℤ) :
 
 variable {n : ℕ} [NeZero n]
 
-/-- **Remark 6.4, quarter twists on gcd graphs.**  If `4 ∣ n` and every element of `D` is odd,
+/-- **Remark 6.3, quarter twists on gcd graphs.**  If `4 ∣ n` and every element of `D` is odd,
 every edge weight at the quarter twist `m = n/4` of `X_n(D)` vanishes, hence so does the
 Jacobian. -/
 theorem cWeight_quarter_gcd (h4 : 4 ∣ n) {D : Finset ℕ} (hDodd : ∀ d ∈ D, Odd d)
@@ -273,6 +273,8 @@ theorem cWeight_quarter_gcd (h4 : 4 ∣ n) {D : Finset ℕ} (hDodd : ∀ d ∈ D
   field_simp
   ring
 
+/-- **Remark 6.3, quarter twists on gcd graphs.**  If `4 ∣ n` and every element of `D` is odd, the
+Jacobian at the quarter twist `m = n/4` of `X_n(D)` vanishes. -/
 theorem cJac_quarter_gcd (h4 : 4 ∣ n) {D : Finset ℕ} (hDodd : ∀ d ∈ D, Odd d) (K : ℝ)
     (f : ZMod n → ℝ) (i : ZMod n) : cJac (gcdSet n D) K ((n / 4 : ℕ) : ZMod n) f i = 0 := by
   unfold cJac

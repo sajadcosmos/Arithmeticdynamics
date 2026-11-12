@@ -2,7 +2,7 @@
 Arithmetic Dynamics on Unitary Cayley and GCD Graphs:
 exact consensus rates and twisted states from Ramanujan sums
 
-Complete Lean 4 formalisation in a single file: 19 parts, 312 theorems.
+Complete Lean 4 formalisation in a single file: 20 parts, 344 theorems.
 Verified with Lean v4.36.0-rc2 and Mathlib commit 2ddf59c8f142.
 No `sorry`; every theorem depends only on the standard axioms
 `propext`, `Classical.choice`, `Quot.sound`.
@@ -18,7 +18,6 @@ The only import needed is `Mathlib`. To run online, paste into https://live.lean
 import Mathlib
 
 /-! ════════════════════════ Part 1: Consensus ════════════════════════ -/
-
 /-
 Arithmetic Dynamics on Unitary Cayley and GCD Graphs
 Part I: the algebra behind the optimal consensus rate (Section 4 of the paper).
@@ -119,7 +118,6 @@ theorem rate_denominator_pos {p q : ℝ} (hp : 2 ≤ p) (hq : 3 ≤ q) :
 end ArithmeticDynamics
 
 /-! ════════════════════════ Part 2: Kuramoto ════════════════════════ -/
-
 /-
 Arithmetic Dynamics on Unitary Cayley and GCD Graphs
 Part II: the trigonometric core of the Kuramoto results (Section 5 of the paper).
@@ -215,7 +213,6 @@ theorem exponent_four_dvd {y : ℝ} (hy : -1 < y) : 0 < (1 + y) / 2 - 0 := by
 end ArithmeticDynamics
 
 /-! ════════════════════════ Part 3: Arithmetic ════════════════════════ -/
-
 /-
 Arithmetic Dynamics on Unitary Cayley and GCD Graphs
 Part III: totient bounds behind the extremal Ramanujan sums (Section 3 of the paper).
@@ -244,7 +241,6 @@ theorem minFac_pred_le_totient {n M : ℕ} (hM : 1 < M) (hMn : M ∣ n) :
 end ArithmeticDynamics
 
 /-! ════════════════════════ Part 4: Extremal ════════════════════════ -/
-
 /-
 Arithmetic Dynamics on Unitary Cayley and GCD Graphs
 Part IV: the function `r(M) = μ(M)/φ(M)`, its extremal values on the divisors of `n`
@@ -435,16 +431,19 @@ theorem r_eq_zero_of_four_dvd {M : ℕ} (h : 4 ∣ M) : r M = 0 := by
     norm_num at this
   simp [r, moebius_eq_zero_of_not_squarefree hns]
 
+/-- **Lemma 5.3.**  `g(2) = 2`. -/
 theorem g_two : g 2 = 2 := by
   have h : 2 / Nat.gcd 2 2 = 1 := by norm_num
   rw [g, h, r_one, r_two]
   norm_num
 
+/-- **Lemma 5.3.**  `g(4) = 0`. -/
 theorem g_four : g 4 = 0 := by
   have h : 4 / Nat.gcd 2 4 = 2 := by norm_num
   rw [g, h, r_two, r_eq_zero_of_four_dvd (dvd_refl 4)]
   norm_num
 
+/-- **Lemma 5.3.**  `g(6) = -1/4`. -/
 theorem g_six : g 6 = -1 / 4 := by
   have h : 6 / Nat.gcd 2 6 = 3 := by norm_num
   rw [g, h, r_three, r_six]
@@ -539,7 +538,6 @@ theorem g_ge {M : ℕ} (hM : 2 ≤ M) (h4 : M ≠ 4) (h6 : M ≠ 6) : 1 / 8 ≤ 
 end ArithmeticDynamics
 
 /-! ════════════════════════ Part 5: Ramanujan ════════════════════════ -/
-
 /-
 Arithmetic Dynamics on Unitary Cayley and GCD Graphs
 Part V: Ramanujan sums and Hölder's formula  `c_n(j) = φ(n) · μ(M)/φ(M)`,  `M = ord(j)`
@@ -719,7 +717,6 @@ theorem ramanujan_eq {n : ℕ} [NeZero n] (j : ZMod n) :
 end ArithmeticDynamics
 
 /-! ════════════════════════ Part 6: Spectrum ════════════════════════ -/
-
 /-
 Arithmetic Dynamics on Unitary Cayley and GCD Graphs
 Part VI: the spectrum of the unitary Cayley graph `X_n` (Theorem 3.2) and the exact
@@ -925,7 +922,6 @@ theorem consensus_rate_unitaryCayley {p q : ℕ} (hp : p.Prime) (hq : q.Prime)
 end ArithmeticDynamics
 
 /-! ════════════════════════ Part 7: Twisted ════════════════════════ -/
-
 /-
 Arithmetic Dynamics on Unitary Cayley and GCD Graphs
 Part VII: twisted states of the Kuramoto model on `X_n` (Section 5 of the paper):
@@ -1245,7 +1241,6 @@ theorem jac_quarter (h4 : 4 ∣ n) (K : ℝ) (f : ZMod n → ℂ) (i : ZMod n) :
 end ArithmeticDynamics
 
 /-! ════════════════════════ Part 8: Classification ════════════════════════ -/
-
 /-
 Arithmetic Dynamics on Unitary Cayley and GCD Graphs
 Part VIII: completeness of the character spectrum, the natural-step bound
@@ -1445,7 +1440,6 @@ theorem lap_eigenvalue (f : ZMod n → ℂ) (c : ℂ) (hf : f ≠ 0)
 end ArithmeticDynamics
 
 /-! ════════════════════════ Part 9: Rates ════════════════════════ -/
-
 /-
 Arithmetic Dynamics on Unitary Cayley and GCD Graphs
 Part IX: exact extremal values of r on the divisors of n, the optimal consensus rate and
@@ -1720,7 +1714,6 @@ theorem mem_divSet_iff {n : ℕ} [NeZero n] (x : ℝ) :
 end ArithmeticDynamics
 
 /-! ════════════════════════ Part 10: Fourier ════════════════════════ -/
-
 /-
 Arithmetic Dynamics on Unitary Cayley and GCD Graphs
 Part X: Fourier analysis on `ℤ/n` — orthogonality, Plancherel, and the Laplacian of `X_n`
@@ -1924,7 +1917,6 @@ theorem quadForm_bounds (f : ZMod n → ℝ) (hf : ∑ j, f j = 0) {c C : ℝ}
 end ArithmeticDynamics
 
 /-! ════════════════════════ Part 11: Multiplicity ════════════════════════ -/
-
 /-
 Arithmetic Dynamics on Unitary Cayley and GCD Graphs
 Part XI: equality cases of Lemma 3.1, exact multiplicities in Theorem 3.2, and the
@@ -2399,7 +2391,6 @@ theorem spectral_ratio {m : ℕ} (hm : 2 ≤ m) {rmax rmin : ℝ} (hmax : IsGrea
 end ArithmeticDynamics
 
 /-! ════════════════════════ Part 12: ConsensusDynamics ════════════════════════ -/
-
 /-
 Arithmetic Dynamics on Unitary Cayley and GCD Graphs
 Part XII: consensus dynamics on `X_n` — the discrete iteration with its exact contraction
@@ -2779,7 +2770,6 @@ theorem continuous_consensus {a : ℝ} (ha : ∀ k : ZMod n, k ≠ 0 → a ≤ l
 end ArithmeticDynamics
 
 /-! ════════════════════════ Part 13: Density ════════════════════════ -/
-
 /-
 Arithmetic Dynamics on Unitary Cayley and GCD Graphs
 Part XIII: densities — the mean of a periodic sequence, and counting residues with
@@ -2939,7 +2929,6 @@ end CRT
 end ArithmeticDynamics
 
 /-! ════════════════════════ Part 14: MeanValue ════════════════════════ -/
-
 /-
 Arithmetic Dynamics on Unitary Cayley and GCD Graphs
 Part XIV: the mean value of the optimal consensus rate (Proposition 4.9).
@@ -3589,7 +3578,6 @@ theorem mean_value :
 end ArithmeticDynamics
 
 /-! ════════════════════════ Part 15: Energy ════════════════════════ -/
-
 /-
 Arithmetic Dynamics on Unitary Cayley and GCD Graphs
 Part XV: the Kuramoto energy, its gradient structure, regularity of the vector field,
@@ -3728,6 +3716,8 @@ theorem analyticAt_energy (K : ℝ) (x : ZMod n → ℝ) : AnalyticAt ℝ (energ
 noncomputable def jacR (K : ℝ) (m : ZMod n) (f : ZMod n → ℝ) (i : ZMod n) : ℝ :=
   K / (Nat.totient n : ℝ) * ∑ u : (ZMod n)ˣ, twistWeight n m u * (f (i + u) - f i)
 
+/-- **Lemma 5.2 (ii).**  The Fréchet derivative of the Kuramoto field on `X_n`:
+`(DF(θ) f)_i = (K/φ(n)) ∑_u cos(θ_{i+u} - θ_i)(f_{i+u} - f_i)`. -/
 theorem fderiv_kuramotoField (K : ℝ) (θ f : ZMod n → ℝ) (i : ZMod n) :
     fderiv ℝ (kuramotoField n K) θ f i
       = K / (Nat.totient n : ℝ) * ∑ u : (ZMod n)ˣ, cos (θ (i + u) - θ i) * (f (i + u) - f i) := by
@@ -3978,7 +3968,6 @@ theorem energy_three_quarter_kick (h4 : 4 ∣ n) (K t : ℝ) :
 end ArithmeticDynamics
 
 /-! ════════════════════════ Part 16: Nonlinear ════════════════════════ -/
-
 /-
 Arithmetic Dynamics on Unitary Cayley and GCD Graphs
 Part XVI: nonlinear stability conclusions (Theorems 5.4, 5.5, 5.6 (iii), Corollary 5.7).
@@ -4134,6 +4123,45 @@ theorem sync_expStable (hL : LyapunovIndirectStability n) {K : ℝ} (hK : 0 < K)
       have : ((0 : ℕ) : ZMod n) = 0 := Nat.cast_zero
       rw [this]
       exact quad_sync hK.le w hw) r' hr' hr
+
+/-! ### Theorem 5.5: the second hexagonal state `m = 5n/6` -/
+
+omit [NeZero n] in
+theorem natCast_five_sixth (h6 : 6 ∣ n) :
+    ((5 * (n / 6) : ℕ) : ZMod n) = -((n / 6 : ℕ) : ZMod n) := by
+  rw [eq_neg_iff_add_eq_zero, ← Nat.cast_add]
+  have e : 5 * (n / 6) + n / 6 = n := by omega
+  rw [e, ZMod.natCast_self]
+
+/-- At the hexagonal state `m = 5n/6` every edge weight is again `1/2`. -/
+theorem twistWeight_hex_five (h6 : 6 ∣ n) (u : (ZMod n)ˣ) :
+    twistWeight n ((5 * (n / 6) : ℕ) : ZMod n) u = 1 / 2 := by
+  rw [natCast_five_sixth h6, twistWeight_neg, twistWeight_hex h6]
+
+/-- **Theorem 5.5 for `m = 5n/6`.**  The Jacobian at `m = 5n/6` equals the Jacobian at `m = n/6`,
+namely `-(K/(2φ(n)))` times the Laplacian of `X_n`. -/
+theorem jac_hex_five (h6 : 6 ∣ n) (K : ℝ) (f : ZMod n → ℂ) (i : ZMod n) :
+    jac n K ((5 * (n / 6) : ℕ) : ZMod n) f i
+      = -((K / (2 * (Nat.totient n : ℝ)) : ℝ) : ℂ) * lap n f i := by
+  rw [← jac_hex h6]
+  unfold jac
+  simp only [twistWeight_hex_five h6, twistWeight_hex h6]
+
+/-- **Theorem 5.5 for `m = 5n/6`.**  For `6 ∣ n` the hexagonal state `θ_j = -jπ/3` (that is,
+`m = 5n/6`) is exponentially stable modulo rotation with every rate `r' < K/4`. -/
+theorem hex_expStable_five (hL : LyapunovIndirectStability n) (h6 : 6 ∣ n) {K : ℝ} (hK : 0 < K)
+    {r' : ℝ} (hr' : 0 < r') (hr : r' < K / 4) :
+    ExpStableOnLevel (kuramotoField n K) (twisted n (5 * (n / 6))) r' := by
+  have hJ : ∀ (f : ZMod n → ℝ) (i : ZMod n),
+      jacR K ((5 * (n / 6) : ℕ) : ZMod n) f i = jacR K ((n / 6 : ℕ) : ZMod n) f i := by
+    intro f i
+    unfold jacR
+    simp only [twistWeight_hex_five h6, twistWeight_hex h6]
+  exact hL _ _ (K / 4) (contDiff_kuramotoField K) (lipschitz_kuramotoField K)
+    (kuramotoField_twisted_eq K _) (sum_kuramotoField K) (by positivity)
+    (fun w hw => by
+      simp_rw [fderiv_kuramotoField_twisted, hJ]
+      exact quad_hex h6 hK.le w hw) r' hr' hr
 
 /-! ### Theorem 5.5: the linear rates are exact -/
 
@@ -4347,7 +4375,6 @@ theorem exists_order_six_iff : (∃ m : ZMod n, m ≠ 0 ∧ addOrderOf m = 6) �
 end ArithmeticDynamics
 
 /-! ════════════════════════ Part 17: Circulant ════════════════════════ -/
-
 /-
 Arithmetic Dynamics on Unitary Cayley and GCD Graphs
 Part XVII: general circulant graphs `Cay(ℤ/n, S)` — the Kuramoto field, its Jacobian at twisted
@@ -4848,12 +4875,11 @@ theorem cLap_eig_pos (hgen : AddSubgroup.closure (S : Set (ZMod n)) = ⊤) (k : 
 end ArithmeticDynamics
 
 /-! ════════════════════════ Part 18: GcdGraph ════════════════════════ -/
-
 /-
 Arithmetic Dynamics on Unitary Cayley and GCD Graphs
 Part XVIII: gcd graphs `X_n(D)` — symmetry, the hexagonal state (Proposition 6.2), the
 decomposition (2.5) of the symbol into Ramanujan sums, integrality of the spectrum and the
-rationality of the consensus rate (Proposition 6.3).
+rationality of the consensus rate (Proposition 6.4).
 -/
 
 namespace ArithmeticDynamics
@@ -5016,7 +5042,7 @@ theorem gcd_sync_expStable (hL : LyapunovIndirectStability n) {D : Finset ℕ}
     field_simp
   linarith
 
-/-! ### Equation (2.5) and Proposition 6.3 -/
+/-! ### Equation (2.5) and Proposition 6.4 -/
 
 /-- **Equation (2.5).**  For `d ∣ n`, the sum of `e(ks/n)` over `gcd(s, n) = d` is the Ramanujan
 sum `c_{n/d}(k)`. -/
@@ -5128,9 +5154,12 @@ theorem cSym_gcd_int (D : Finset ℕ) (k : ZMod n) : ∃ z : ℤ, cSym (gcdSet n
   push_cast at h
   exact_mod_cast h
 
-/-- **Proposition 6.3.**  On a connected gcd graph `X_n(D)`, with `C⁺ = max_{k≠0} C(k)` and
-`C⁻ = min_{k≠0} C(k)`, the extreme Laplacian eigenvalues are `λ₂ = |S| - C⁺` and
-`λ_max = |S| - C⁻`, the optimal rate is `(C⁺ - C⁻)/(2|S| - C⁺ - C⁻)`, and it is rational. -/
+/-- **Extreme eigenvalues of a gcd graph** (used in Proposition 6.4).  For every gcd graph
+`X_n(D)`, `n ≥ 2`, with `C⁺ = max_{k≠0} C(k)` and `C⁻ = min_{k≠0} C(k)`, every non-trivial
+Laplacian eigenvalue `|S| - C(k)` lies in `[|S| - C⁺, |S| - C⁻]`, both ends are attained, the
+quotient `(λ_max - λ₂)/(λ_max + λ₂)` equals `(C⁺ - C⁻)/(2|S| - C⁺ - C⁻)`, and this number is
+rational.  No connectivity is assumed here; the dynamical statements, which do need it, are
+`gcd_consensus` (connected) and `gcd_no_consensus` (disconnected) in `GcdConsensus.lean`. -/
 theorem gcd_rate (D : Finset ℕ) (hn : 1 < n) :
     let S := gcdSet n D
     let ne : (univ.erase (0 : ZMod n)).Nonempty :=
@@ -5163,19 +5192,18 @@ theorem gcd_rate (D : Finset ℕ) (hn : 1 < n) :
 end ArithmeticDynamics
 
 /-! ════════════════════════ Part 19: Remarks ════════════════════════ -/
-
 /-
 Arithmetic Dynamics on Unitary Cayley and GCD Graphs
-Part XIX: the mathematical content of the remarks — the set of values of `ρ*` (Remark 4.4),
+Part XIX: the mathematical content of the remarks — the set of values of `ρ*` (Remark 4.6),
 the phase lags at hexagonal states (Remarks 5.8 and 6.4), the density bound (Remark 5.9),
-and the quarter twists on gcd graphs (Remark 6.4).
+and the quarter twists on gcd graphs (Remark 6.3).
 -/
 
 namespace ArithmeticDynamics
 
 open Finset Real Filter Topology ArithmeticFunction
 
-/-! ### Remark 4.4: the set of values of the optimal rate -/
+/-! ### Remark 4.6: the set of values of the optimal rate -/
 
 /-- For fixed `p`, the rate `q/(2(p-1)(q-1)+q-2)` is strictly decreasing in `q`. -/
 theorem rate_strictAnti_q {p q₁ q₂ : ℝ} (hp : 2 ≤ p) (hq : 3 ≤ q₁) (hlt : q₁ < q₂) :
@@ -5211,7 +5239,7 @@ theorem rate_prime_pow_tendsto : Tendsto (fun p : ℝ => 1 / (2 * p - 1)) atTop 
   refine this.inv_tendsto_atTop.congr fun p => ?_
   simp [one_div]
 
-/-- **Remark 4.4, even moduli.**  For even `n > 2`, `1/3 ≤ ρ*(X_n) ≤ 3/5`. -/
+/-- **Remark 4.6, even moduli.**  For even `n > 2`, `1/3 ≤ ρ*(X_n) ≤ 3/5`. -/
 theorem rate_even {m : ℕ} (hm : 2 < m) (heven : 2 ∣ m) {ρ : ℝ} (h : IsRate m ρ) :
     1 / 3 ≤ ρ ∧ ρ ≤ 3 / 5 := by
   refine ⟨?_, (rate_le_and_eq_iff hm.le h).1⟩
@@ -5238,7 +5266,7 @@ theorem rate_even {m : ℕ} (hm : 2 < m) (heven : 2 ∣ m) {ρ : ℝ} (h : IsRat
     push_cast
     linarith
 
-/-- **Remark 4.4, odd moduli.**  For odd `n ≥ 3`, `ρ*(X_n) ≤ 5/19`, with equality iff `15 ∣ n`. -/
+/-- **Remark 4.6, odd moduli.**  For odd `n ≥ 3`, `ρ*(X_n) ≤ 5/19`, with equality iff `15 ∣ n`. -/
 theorem rate_odd {m : ℕ} (hm : 2 ≤ m) (hodd : ¬ 2 ∣ m) {ρ : ℝ} (h : IsRate m ρ) :
     ρ ≤ 5 / 19 ∧ (ρ = 5 / 19 ↔ 15 ∣ m) := by
   have hmin3 : 3 ≤ m.minFac := by
@@ -5408,7 +5436,7 @@ theorem cos_hex_cases (s : ℤ) :
 
 variable {n : ℕ} [NeZero n]
 
-/-- **Remark 6.4, quarter twists on gcd graphs.**  If `4 ∣ n` and every element of `D` is odd,
+/-- **Remark 6.3, quarter twists on gcd graphs.**  If `4 ∣ n` and every element of `D` is odd,
 every edge weight at the quarter twist `m = n/4` of `X_n(D)` vanishes, hence so does the
 Jacobian. -/
 theorem cWeight_quarter_gcd (h4 : 4 ∣ n) {D : Finset ℕ} (hDodd : ∀ d ∈ D, Odd d)
@@ -5437,6 +5465,8 @@ theorem cWeight_quarter_gcd (h4 : 4 ∣ n) {D : Finset ℕ} (hDodd : ∀ d ∈ D
   field_simp
   ring
 
+/-- **Remark 6.3, quarter twists on gcd graphs.**  If `4 ∣ n` and every element of `D` is odd, the
+Jacobian at the quarter twist `m = n/4` of `X_n(D)` vanishes. -/
 theorem cJac_quarter_gcd (h4 : 4 ∣ n) {D : Finset ℕ} (hDodd : ∀ d ∈ D, Odd d) (K : ℝ)
     (f : ZMod n → ℝ) (i : ZMod n) : cJac (gcdSet n D) K ((n / 4 : ℕ) : ZMod n) f i = 0 := by
   unfold cJac
@@ -5446,5 +5476,568 @@ theorem cJac_quarter_gcd (h4 : 4 ∣ n) {D : Finset ℕ} (hDodd : ∀ d ∈ D, O
 theorem g_one : g 1 = 0 := by
   unfold g
   norm_num [r_one]
+
+end ArithmeticDynamics
+
+/-! ════════════════════════ Part 20: GcdConsensus ════════════════════════ -/
+/-
+Arithmetic Dynamics on Unitary Cayley and GCD Graphs
+Part XX: consensus on general circulants and on gcd graphs (Proposition 6.4 and Example 6.5).
+
+* the iteration `x ↦ (I - ε L_S) x` on an arbitrary symmetric circulant `Cay(ℤ/n, S)`,
+  with the spectral contraction estimate and the exact decay of each Fourier mode;
+* connected case: with the optimal step the error contracts at the rate
+  `ρ* = (λ_max - λ₂)/(λ_max + λ₂) < 1`, so consensus occurs, and no constant step does better;
+* disconnected case: `λ₂ = 0` and a non-constant vector is fixed by every step, so consensus
+  fails from that initial condition;
+* for gcd graphs `X_n(D)` with `D` a set of proper divisors: connectivity is equivalent to
+  `gcd(D) = 1`, and the two cases above are stated with `C⁺ = max_{k≠0} C(k)`,
+  `C⁻ = min_{k≠0} C(k)`;
+* the example `n = 6`, `D = {2}` (two disjoint triangles).
+-/
+
+namespace ArithmeticDynamics
+
+open Finset Filter Topology
+
+variable {n : ℕ} [NeZero n]
+
+/-! ### The consensus iteration on a circulant -/
+
+/-- One step of the consensus iteration `x ↦ (I - ε L_S) x` on `Cay(ℤ/n, S)`. -/
+noncomputable def cStep (S : Finset (ZMod n)) (ε : ℝ) (x : ZMod n → ℝ) : ZMod n → ℝ :=
+  fun j => x j - ε * cLap S x j
+
+variable {S : Finset (ZMod n)}
+
+omit [NeZero n] in
+theorem cLap_sub_const (x : ZMod n → ℝ) (c : ℝ) :
+    cLap S (fun j => x j - c) = cLap S x := by
+  funext i
+  unfold cLap
+  rw [sum_sub_distrib, sum_const, nsmul_eq_mul]
+  ring
+
+omit [NeZero n] in
+theorem cLap_smul (x : ZMod n → ℝ) (c : ℝ) :
+    cLap S (fun j => c * x j) = fun j => c * cLap S x j := by
+  funext i
+  unfold cLap
+  rw [← mul_sum]
+  ring
+
+theorem sum_cStep (ε : ℝ) (x : ZMod n → ℝ) : ∑ j, cStep S ε x j = ∑ j, x j := by
+  unfold cStep
+  rw [sum_sub_distrib, ← mul_sum, sum_cLap, mul_zero, sub_zero]
+
+theorem avg_cStep (ε : ℝ) (x : ZMod n → ℝ) : avg (cStep S ε x) = avg x := by
+  unfold avg
+  rw [sum_cStep]
+
+theorem err_cStep (ε : ℝ) (x : ZMod n → ℝ) : err (cStep S ε x) = cStep S ε (err x) := by
+  funext j
+  unfold err
+  rw [avg_cStep]
+  unfold cStep
+  rw [cLap_sub_const]
+  ring
+
+/-- **Spectral contraction on a circulant.**  If `|1 - ε (|S| - C(k))| ≤ ρ` for every `k ≠ 0`,
+then on sum-zero vectors one step contracts the squared norm by `ρ²`. -/
+theorem sqNorm_cStep_le (hS : IsSymm S) (f : ZMod n → ℝ) (hf : ∑ j, f j = 0) {ε ρ : ℝ}
+    (hρ : ∀ k : ZMod n, k ≠ 0 → |1 - ε * ((#S : ℝ) - cSym S k)| ≤ ρ) :
+    sqNorm (cStep S ε f) ≤ ρ ^ 2 * sqNorm f := by
+  have hn : (0 : ℝ) < n := by exact_mod_cast Nat.pos_of_ne_zero (NeZero.ne n)
+  set g : ZMod n → ℝ := cStep S ε f with hg
+  have hdft : ∀ k, ZMod.dft (fun x => (g x : ℂ)) k
+      = ((1 - ε * ((#S : ℝ) - cSym S k) : ℝ) : ℂ) * ZMod.dft (fun x => (f x : ℂ)) k := by
+    intro k
+    have e : (fun x => (g x : ℂ))
+        = (fun x => (f x : ℂ)) - (ε : ℂ) • (fun x => (cLap S f x : ℂ)) := by
+      funext x
+      simp only [hg, cStep, Pi.sub_apply, Pi.smul_apply, smul_eq_mul]
+      push_cast
+      ring
+    rw [e, map_sub, map_smul, Pi.sub_apply, Pi.smul_apply, dft_cLap hS, smul_eq_mul]
+    push_cast
+    ring
+  have key : ∀ k : ZMod n, Complex.normSq (ZMod.dft (fun x => (g x : ℂ)) k)
+      ≤ ρ ^ 2 * Complex.normSq (ZMod.dft (fun x => (f x : ℂ)) k) := by
+    intro k
+    by_cases hk : k = 0
+    · subst hk
+      rw [hdft, dft_zero_of_sum_zero f hf]
+      simp
+    · rw [hdft, Complex.normSq_mul, Complex.normSq_ofReal]
+      have h1 := hρ k hk
+      have h2 : (1 - ε * ((#S : ℝ) - cSym S k)) * (1 - ε * ((#S : ℝ) - cSym S k)) ≤ ρ ^ 2 := by
+        rw [← sq, ← sq_abs]
+        exact pow_le_pow_left₀ (abs_nonneg _) h1 2
+      exact mul_le_mul_of_nonneg_right h2 (Complex.normSq_nonneg _)
+  have hsum := sum_le_sum fun k (_ : k ∈ (univ : Finset (ZMod n))) => key k
+  rw [← mul_sum, sum_normSq_dft, sum_normSq_dft] at hsum
+  have : (n : ℝ) * sqNorm g ≤ (n : ℝ) * (ρ ^ 2 * sqNorm f) := by linarith
+  exact le_of_mul_le_mul_left this hn
+
+/-- Iterated form: `‖x(t) - x̄ 1‖² ≤ ρ^{2t} ‖x(0) - x̄ 1‖²`. -/
+theorem sqNorm_err_cIterate (hS : IsSymm S) {ε ρ : ℝ}
+    (hρ : ∀ k : ZMod n, k ≠ 0 → |1 - ε * ((#S : ℝ) - cSym S k)| ≤ ρ)
+    (x : ZMod n → ℝ) (t : ℕ) :
+    sqNorm (err ((cStep S ε)^[t] x)) ≤ (ρ ^ 2) ^ t * sqNorm (err x) := by
+  induction t with
+  | zero => simp
+  | succ t ih =>
+    rw [Function.iterate_succ_apply', err_cStep, pow_succ]
+    calc sqNorm (cStep S ε (err ((cStep S ε)^[t] x)))
+        ≤ ρ ^ 2 * sqNorm (err ((cStep S ε)^[t] x)) := sqNorm_cStep_le hS _ (sum_err _) hρ
+      _ ≤ ρ ^ 2 * ((ρ ^ 2) ^ t * sqNorm (err x)) :=
+          mul_le_mul_of_nonneg_left ih (sq_nonneg _)
+      _ = (ρ ^ 2) ^ t * ρ ^ 2 * sqNorm (err x) := by ring
+
+/-! ### Exact decay of a single Fourier mode -/
+
+/-- The real Fourier mode `x_j = cos(2π k j/n)`. -/
+noncomputable def cosMode (k : ZMod n) : ZMod n → ℝ := fun j => cWeight k j
+
+theorem cLap_cosMode (hS : IsSymm S) (k : ZMod n) :
+    cLap S (cosMode k) = fun j => ((#S : ℝ) - cSym S k) * cosMode k j := by
+  funext j
+  have h : ∑ s ∈ S, (ZMod.stdAddChar (k * (j + s)) : ℂ)
+      = (cSym S k : ℂ) * ZMod.stdAddChar (k * j) := by
+    rw [cSym_eq hS, sum_mul]
+    refine sum_congr rfl fun s _ => ?_
+    rw [mul_add, AddChar.map_add_eq_mul, mul_comm]
+  have hre := congrArg Complex.re h
+  rw [Complex.re_sum, Complex.re_ofReal_mul] at hre
+  unfold cLap cosMode
+  change (#S : ℝ) * cWeight k j - ∑ s ∈ S, (ZMod.stdAddChar (k * (j + s)) : ℂ).re = _
+  rw [hre]
+  unfold cWeight
+  ring
+
+theorem sum_cosMode {k : ZMod n} (hk : k ≠ 0) : ∑ j, cosMode k j = 0 := by
+  have h := sum_stdAddChar_mul (n := n) k
+  rw [ite_eq_right_iff.mpr (fun h' => absurd h' hk)] at h
+  have hre := congrArg Complex.re h
+  rw [Complex.re_sum, Complex.zero_re] at hre
+  unfold cosMode cWeight
+  simpa [mul_comm] using hre
+
+theorem cosMode_zero (k : ZMod n) : cosMode k 0 = 1 := by
+  unfold cosMode cWeight
+  simp
+
+theorem err_cosMode {k : ZMod n} (hk : k ≠ 0) : err (cosMode k) = cosMode k := by
+  funext j
+  unfold err avg
+  rw [sum_cosMode hk]
+  simp
+
+theorem cIterate_cosMode (hS : IsSymm S) (k : ZMod n) (ε : ℝ) (t : ℕ) :
+    (cStep S ε)^[t] (cosMode k) = fun j => (1 - ε * ((#S : ℝ) - cSym S k)) ^ t * cosMode k j := by
+  induction t with
+  | zero => funext j; simp
+  | succ t ih =>
+    rw [Function.iterate_succ_apply', ih]
+    funext j
+    unfold cStep
+    rw [cLap_smul, cLap_cosMode hS]
+    ring
+
+theorem sqNorm_smul (c : ℝ) (x : ZMod n → ℝ) : sqNorm (fun j => c * x j) = c ^ 2 * sqNorm x := by
+  unfold sqNorm
+  rw [mul_sum]
+  refine sum_congr rfl fun j _ => ?_
+  ring
+
+/-- **Exactness of a mode.**  For `k ≠ 0` the real mode `cos(2π k j/n)` is a non-constant initial
+vector whose consensus error decays exactly by the factor `|1 - ε(|S| - C(k))|` per step. -/
+theorem circulant_mode_exact (hS : IsSymm S) {k : ZMod n} (hk : k ≠ 0) (ε : ℝ) :
+    err (cosMode k) ≠ 0 ∧ ∀ t : ℕ,
+      sqNorm (err ((cStep S ε)^[t] (cosMode k)))
+        = ((1 - ε * ((#S : ℝ) - cSym S k)) ^ 2) ^ t * sqNorm (err (cosMode k)) := by
+  refine ⟨?_, fun t => ?_⟩
+  · rw [err_cosMode hk]
+    intro h
+    have := congrFun h 0
+    rw [cosMode_zero] at this
+    exact one_ne_zero this
+  · have hsum : ∑ j, ((cStep S ε)^[t] (cosMode k)) j = 0 := by
+      rw [cIterate_cosMode hS, ← mul_sum, sum_cosMode hk, mul_zero]
+    have herr : err ((cStep S ε)^[t] (cosMode k)) = (cStep S ε)^[t] (cosMode k) := by
+      funext j
+      unfold err avg
+      rw [hsum]
+      simp
+    rw [herr, err_cosMode hk, cIterate_cosMode hS, sqNorm_smul, ← pow_mul, ← pow_mul, mul_comm 2 t]
+
+/-! ### Connected circulants -/
+
+/-- **Consensus on a circulant with spectral bounds `0 < a ≤ λ(k) ≤ b` (`k ≠ 0`).**  With the
+step `ε* = 2/(a+b)` the error contracts at rate `ρ = (b-a)/(a+b) < 1` and tends to zero. -/
+theorem circulant_consensus (hS : IsSymm S) {a b : ℝ} (ha : 0 < a) (hab : a ≤ b)
+    (hk : ∀ k : ZMod n, k ≠ 0 → a ≤ (#S : ℝ) - cSym S k ∧ (#S : ℝ) - cSym S k ≤ b) :
+    0 ≤ (b - a) / (a + b) ∧ (b - a) / (a + b) < 1 ∧
+    ∀ x : ZMod n → ℝ,
+      (∀ t : ℕ, sqNorm (err ((cStep S (2 / (a + b)))^[t] x))
+          ≤ (((b - a) / (a + b)) ^ 2) ^ t * sqNorm (err x)) ∧
+      Tendsto (fun t : ℕ => sqNorm (err ((cStep S (2 / (a + b)))^[t] x))) atTop (𝓝 0) := by
+  have hs : 0 < a + b := by linarith
+  have hρ0 : 0 ≤ (b - a) / (a + b) := div_nonneg (by linarith) hs.le
+  have hρ1 : (b - a) / (a + b) < 1 := by
+    rw [div_lt_one hs]; linarith
+  refine ⟨hρ0, hρ1, fun x => ?_⟩
+  have hbound : ∀ t : ℕ, sqNorm (err ((cStep S (2 / (a + b)))^[t] x))
+      ≤ (((b - a) / (a + b)) ^ 2) ^ t * sqNorm (err x) := by
+    refine sqNorm_err_cIterate hS (fun k hk' => ?_) x
+    exact contraction_of_opt_step hs (by field_simp) (by field_simp) (hk k hk').1 (hk k hk').2
+  refine ⟨hbound, ?_⟩
+  have hq0 : 0 ≤ ((b - a) / (a + b)) ^ 2 := sq_nonneg _
+  have hq1 : ((b - a) / (a + b)) ^ 2 < 1 := by
+    have := pow_lt_pow_left₀ hρ1 hρ0 (two_ne_zero)
+    simpa using this
+  have hlim : Tendsto (fun t : ℕ => (((b - a) / (a + b)) ^ 2) ^ t * sqNorm (err x)) atTop (𝓝 0) := by
+    simpa using (tendsto_pow_atTop_nhds_zero_of_lt_one hq0 hq1).mul_const (sqNorm (err x))
+  exact squeeze_zero (fun t => sqNorm_nonneg _) hbound hlim
+
+/-! ### Disconnected circulants -/
+
+/-- The indicator of the subgroup `g ℤ/n`. -/
+noncomputable def subIndicator (n : ℕ) [NeZero n] (g : ℕ) : ZMod n → ℝ :=
+  fun j => if g ∣ j.val then 1 else 0
+
+theorem dvd_val_add_iff {g : ℕ} (hgn : g ∣ n) {i s : ZMod n} (hs : g ∣ s.val) :
+    g ∣ (i + s).val ↔ g ∣ i.val := by
+  rw [ZMod.val_add, Nat.dvd_mod_iff hgn]
+  exact (Nat.dvd_add_left hs)
+
+theorem cLap_subIndicator {g : ℕ} (hgn : g ∣ n) (hgS : ∀ s ∈ S, g ∣ s.val) :
+    cLap S (subIndicator n g) = 0 := by
+  funext i
+  unfold cLap
+  have : ∀ s ∈ S, subIndicator n g (i + s) = subIndicator n g i := by
+    intro s hs
+    unfold subIndicator
+    simp only [dvd_val_add_iff hgn (hgS s hs)]
+  rw [sum_congr rfl this, sum_const, nsmul_eq_mul]
+  simp
+
+theorem err_subIndicator_ne (hn : 1 < n) {g : ℕ} (hg1 : 1 < g) :
+    err (subIndicator n g) ≠ 0 := by
+  intro h
+  have h0 := congrFun h 0
+  have h1 := congrFun h 1
+  have : Fact (1 < n) := ⟨hn⟩
+  have v1 : (1 : ZMod n).val = 1 := ZMod.val_one n
+  have nd : ¬ g ∣ 1 := fun hd => by have := Nat.le_of_dvd one_pos hd; omega
+  unfold err subIndicator at h0 h1
+  simp only [ZMod.val_zero, dvd_zero, ite_true, v1, nd, ite_false, Pi.zero_apply] at h0 h1
+  linarith
+
+theorem cSym_le (k : ZMod n) : cSym S k ≤ #S := by
+  unfold cSym
+  calc ∑ s ∈ S, cWeight k s ≤ ∑ _s ∈ S, (1 : ℝ) := sum_le_sum fun s _ => cWeight_le k s
+    _ = #S := by simp
+
+theorem lam2_nonneg (hn : 1 < n) : 0 ≤ lam2 S hn := by
+  unfold lam2
+  exact (le_inf'_iff _ _).mpr fun k _ => by linarith [cSym_le (S := S) k]
+
+/-- **No consensus on a disconnected circulant.**  If every element of `S` lies in the proper
+subgroup `g ℤ/n` (`1 < g ∣ n`), then `λ₂ = 0`, and the indicator of that subgroup is a
+non-constant vector fixed by every step of the iteration, so its consensus error never decays. -/
+theorem circulant_no_consensus (hS : IsSymm S) (hn : 1 < n) {g : ℕ} (hg1 : 1 < g)
+    (hgn : g ∣ n) (hgS : ∀ s ∈ S, g ∣ s.val) :
+    lam2 S hn = 0 ∧ err (subIndicator n g) ≠ 0 ∧
+      ∀ (ε : ℝ) (t : ℕ), (cStep S ε)^[t] (subIndicator n g) = subIndicator n g := by
+  have hfix : ∀ (ε : ℝ), cStep S ε (subIndicator n g) = subIndicator n g := by
+    intro ε
+    funext j
+    unfold cStep
+    rw [cLap_subIndicator hgn hgS]
+    simp
+  have hne := err_subIndicator_ne hn hg1
+  refine ⟨?_, hne, fun ε t => Function.iterate_fixed (hfix ε) t⟩
+  refine le_antisymm ?_ (lam2_nonneg hn)
+  by_contra hpos
+  rw [not_le] at hpos
+  set f := err (subIndicator n g) with hf
+  have hq := cLap_quad_lower hS f (sum_err _) (c := lam2 S hn) fun k hk => lam2_le S hn k hk
+  have hz : ∑ j, cLap S f j * f j = 0 := by
+    rw [hf]
+    unfold err
+    rw [cLap_sub_const, cLap_subIndicator hgn hgS]
+    simp
+  rw [hz] at hq
+  have hsq : 0 < sqNorm f := by
+    rcases (sqNorm_nonneg f).lt_or_eq with h | h
+    · exact h
+    · exfalso
+      apply hne
+      funext j
+      have hzero := (sum_eq_zero_iff_of_nonneg (fun j _ => sq_nonneg (f j))).mp h.symm j (mem_univ _)
+      simpa using hzero
+  nlinarith
+
+/-- `λ₂ > 0` exactly when `S` generates `ℤ/n`, i.e. when the circulant is connected. -/
+theorem lam2_pos_iff (hS : IsSymm S) (hn : 1 < n) :
+    0 < lam2 S hn ↔ AddSubgroup.closure (S : Set (ZMod n)) = ⊤ := by
+  constructor
+  · intro hpos
+    by_contra htop
+    -- the subgroup generated by `S` is `g ℤ/n` for a divisor `1 < g ∣ n`
+    set H := AddSubgroup.closure (S : Set (ZMod n)) with hH
+    -- take `g` the additive order of a generator of the quotient: use `g = n / |H|`
+    obtain ⟨g, hg1, hgn, hgS⟩ : ∃ g : ℕ, 1 < g ∧ g ∣ n ∧ ∀ s ∈ S, g ∣ s.val := by
+      -- `H` is cyclic, generated by some `h`; then `g = gcd(h.val, n)` works
+      obtain ⟨h, hh⟩ := IsAddCyclic.exists_generator (α := H)
+      set g := Nat.gcd (h : ZMod n).val n with hgdef
+      have hgn : g ∣ n := Nat.gcd_dvd_right _ _
+      have hmem : ∀ x ∈ H, g ∣ x.val := by
+        intro x hx
+        obtain ⟨m, hm⟩ := hh ⟨x, hx⟩
+        have hx' : x = m • (h : ZMod n) := by
+          have := congrArg Subtype.val hm
+          simpa using this.symm
+        rw [hx', zsmul_eq_mul, ZMod.val_mul, Nat.dvd_mod_iff hgn]
+        exact Dvd.dvd.mul_left (Nat.gcd_dvd_left _ _) _
+      refine ⟨g, ?_, hgn, fun s hs => hmem s (AddSubgroup.subset_closure hs)⟩
+      have hg0 : g ≠ 0 := by
+        rw [hgdef]; exact (Nat.gcd_pos_of_pos_right _ (Nat.pos_of_ne_zero (NeZero.ne n))).ne'
+      have hg1 : g ≠ 1 := by
+        intro hg
+        apply htop
+        rw [eq_top_iff]
+        intro y _
+        -- `h` is a unit multiple of `1`: Bézout gives `1 ∈ H`
+        have hb := Nat.gcd_eq_gcd_ab (h : ZMod n).val n
+        rw [← hgdef, hg] at hb
+        have h1 : (1 : ZMod n) = ((Nat.gcdA (h : ZMod n).val n : ℤ) : ZMod n) * (h : ZMod n) := by
+          have := congrArg (fun z : ℤ => (z : ZMod n)) hb
+          push_cast at this
+          rw [ZMod.natCast_self, zero_mul, add_zero, ZMod.natCast_zmod_val] at this
+          rw [this, mul_comm]
+        have h1H : (1 : ZMod n) ∈ H := by
+          rw [h1, ← zsmul_eq_mul]
+          exact H.zsmul_mem h.2 _
+        have : y = (y.val : ℕ) • (1 : ZMod n) := by
+          rw [nsmul_eq_mul, mul_one, ZMod.natCast_zmod_val]
+        rw [this]
+        exact H.nsmul_mem h1H _
+      omega
+    have := (circulant_no_consensus hS hn hg1 hgn hgS).1
+    linarith
+  · exact lam2_pos hn
+
+/-! ### GCD graphs -/
+
+/-- `D` is a set of proper divisors of `n`. -/
+def ProperDivisors (n : ℕ) (D : Finset ℕ) : Prop := ∀ d ∈ D, d ∣ n ∧ d < n
+
+theorem natCast_mem_gcdSet {D : Finset ℕ} (hD : ProperDivisors n D) {d : ℕ} (hd : d ∈ D) :
+    (d : ZMod n) ∈ gcdSet n D := by
+  unfold gcdSet
+  rw [mem_filter, ZMod.val_natCast_of_lt (hD d hd).2, Nat.gcd_eq_left (hD d hd).1]
+  exact ⟨mem_univ _, hd⟩
+
+theorem dvd_val_of_mem_gcdSet {D : Finset ℕ} {s : ZMod n} (hs : s ∈ gcdSet n D) :
+    D.gcd id ∣ s.val := by
+  unfold gcdSet at hs
+  rw [mem_filter] at hs
+  exact (Finset.gcd_dvd hs.2).trans (Nat.gcd_dvd_left _ _)
+
+/-- **Proposition 6.4 (i): connectivity of gcd graphs.**  For a set `D` of proper divisors of `n ≥ 2`, the gcd graph
+`X_n(D)` is connected if and only if `gcd(D) = 1`. -/
+theorem gcd_connected_iff (hn : 1 < n) {D : Finset ℕ} (hD : ProperDivisors n D) :
+    AddSubgroup.closure ((gcdSet n D : Finset (ZMod n)) : Set (ZMod n)) = ⊤ ↔ D.gcd id = 1 := by
+  set H := AddSubgroup.closure ((gcdSet n D : Finset (ZMod n)) : Set (ZMod n)) with hH
+  constructor
+  · intro htop
+    by_contra hg
+    set g := Nat.gcd (D.gcd id) n with hgdef
+    have hgn : g ∣ n := Nat.gcd_dvd_right _ _
+    have hg0 : g ≠ 0 := (Nat.gcd_pos_of_pos_right _ (Nat.pos_of_ne_zero (NeZero.ne n))).ne'
+    have hg1 : g ≠ 1 := by
+      intro h1
+      rcases D.eq_empty_or_nonempty with he | ⟨d, hd⟩
+      · rw [he, Finset.gcd_empty] at hgdef
+        rw [hgdef, Nat.gcd_zero_left] at h1
+        omega
+      · have : D.gcd id ∣ n := (Finset.gcd_dvd hd).trans (hD d hd).1
+        rw [hgdef, Nat.gcd_eq_left this] at h1
+        exact hg h1
+    have hgS : ∀ s ∈ gcdSet n D, g ∣ s.val := fun s hs =>
+      (Nat.gcd_dvd_left _ _).trans (dvd_val_of_mem_gcdSet hs)
+    have hz := (circulant_no_consensus (gcdSet_symm D) hn (by omega) hgn hgS).1
+    have hp := lam2_pos (S := gcdSet n D) hn htop
+    linarith
+  · intro h1
+    -- every `gcd` of a subfamily of `D` lies in `H`
+    have hsub : ∀ T : Finset ℕ, T ⊆ D → ((T.gcd id : ℕ) : ZMod n) ∈ H := by
+      intro T
+      induction T using Finset.induction_on with
+      | empty => intro _; rw [Finset.gcd_empty, Nat.cast_zero]; exact H.zero_mem
+      | insert a T ha ih =>
+        intro hT
+        have haD : a ∈ D := hT (mem_insert_self a T)
+        have hTH := ih ((subset_insert a T).trans hT)
+        have haH : (a : ZMod n) ∈ H := AddSubgroup.subset_closure (natCast_mem_gcdSet hD haD)
+        rw [Finset.gcd_insert, id]
+        change ((Nat.gcd a (T.gcd id) : ℕ) : ZMod n) ∈ H
+        have hb := Nat.gcd_eq_gcd_ab a (T.gcd id)
+        have hc : ((Nat.gcd a (T.gcd id) : ℕ) : ZMod n)
+            = (Nat.gcdA a (T.gcd id) : ZMod n) * (a : ZMod n)
+              + (Nat.gcdB a (T.gcd id) : ZMod n) * ((T.gcd id : ℕ) : ZMod n) := by
+          have := congrArg (fun z : ℤ => (z : ZMod n)) hb
+          push_cast at this
+          rw [this]; ring
+        rw [hc, ← zsmul_eq_mul, ← zsmul_eq_mul]
+        exact H.add_mem (H.zsmul_mem haH _) (H.zsmul_mem hTH _)
+    have h1H : (1 : ZMod n) ∈ H := by
+      have := hsub D subset_rfl
+      rwa [h1, Nat.cast_one] at this
+    rw [eq_top_iff]
+    intro y _
+    have : y = (y.val : ℕ) • (1 : ZMod n) := by
+      rw [nsmul_eq_mul, mul_one, ZMod.natCast_zmod_val]
+    rw [this]
+    exact H.nsmul_mem h1H _
+
+/-- **Proposition 6.4 (ii): the connected case.**  Let `n ≥ 2` and let `D` be a set of proper divisors
+of `n` with `gcd(D) = 1`, so that `X_n(D)` is connected.  Put `C⁺ = max_{k≠0} C(k)` and
+`C⁻ = min_{k≠0} C(k)`.  Then `λ₂ = |S| - C⁺ > 0`, the optimal rate
+`ρ* = (C⁺ - C⁻)/(2|S| - C⁺ - C⁻)` lies in `[0, 1)`, the iteration with step
+`ε* = 2/(2|S| - C⁺ - C⁻)` satisfies `‖x(t) - x̄ 1‖² ≤ ρ*^{2t} ‖x(0) - x̄ 1‖²` and reaches
+consensus from every initial vector, and for every constant step `ε` some non-constant initial
+vector decays no faster than `ρ*^t`. -/
+theorem gcd_consensus (hn : 1 < n) {D : Finset ℕ} (hD : ProperDivisors n D)
+    (hgcd : D.gcd id = 1) :
+    let S := gcdSet n D
+    let ne : (univ.erase (0 : ZMod n)).Nonempty :=
+      ⟨1, mem_erase.mpr ⟨by haveI : Fact (1 < n) := ⟨hn⟩; exact one_ne_zero, mem_univ _⟩⟩
+    let Cp := (univ.erase (0 : ZMod n)).sup' ne (cSym S)
+    let Cm := (univ.erase (0 : ZMod n)).inf' ne (cSym S)
+    let ρ := (Cp - Cm) / (2 * (#S : ℝ) - Cp - Cm)
+    lam2 S hn = (#S : ℝ) - Cp ∧ 0 < (#S : ℝ) - Cp ∧
+    0 ≤ ρ ∧ ρ < 1 ∧
+    (∀ x : ZMod n → ℝ,
+      (∀ t : ℕ, sqNorm (err ((cStep S (2 / (2 * (#S : ℝ) - Cp - Cm)))^[t] x))
+          ≤ (ρ ^ 2) ^ t * sqNorm (err x)) ∧
+      Tendsto (fun t : ℕ => sqNorm (err ((cStep S (2 / (2 * (#S : ℝ) - Cp - Cm)))^[t] x)))
+        atTop (𝓝 0)) ∧
+    ∀ ε : ℝ, ∃ x : ZMod n → ℝ, err x ≠ 0 ∧
+      ∀ t : ℕ, (ρ ^ 2) ^ t * sqNorm (err x) ≤ sqNorm (err ((cStep S ε)^[t] x)) := by
+  intro S ne Cp Cm ρ
+  have hS : IsSymm S := gcdSet_symm D
+  have htop := (gcd_connected_iff hn hD).mpr hgcd
+  obtain ⟨kp, hkp, hp⟩ := exists_mem_eq_sup' ne (cSym S)
+  obtain ⟨km, hkm, hm⟩ := exists_mem_eq_inf' ne (cSym S)
+  have hkp0 : kp ≠ 0 := ne_of_mem_erase hkp
+  have hkm0 : km ≠ 0 := ne_of_mem_erase hkm
+  have hCp : Cp = cSym S kp := hp
+  have hCm : Cm = cSym S km := hm
+  set a := (#S : ℝ) - Cp with ha
+  set b := (#S : ℝ) - Cm with hb
+  have hlo : ∀ k : ZMod n, k ≠ 0 → a ≤ (#S : ℝ) - cSym S k ∧ (#S : ℝ) - cSym S k ≤ b := by
+    intro k hk
+    have hmem : k ∈ univ.erase (0 : ZMod n) := mem_erase.mpr ⟨hk, mem_univ _⟩
+    exact ⟨by have := le_sup' (cSym S) hmem; linarith,
+      by have := inf'_le (cSym S) hmem; linarith⟩
+  have hlam : lam2 S hn = a := by
+    refine le_antisymm ?_ ?_
+    · have := lam2_le S hn kp hkp0
+      rw [ha, hCp]
+      exact this
+    · unfold lam2
+      exact (le_inf'_iff _ _).mpr fun k hk => (hlo k (ne_of_mem_erase hk)).1
+  have ha0 : 0 < a := hlam ▸ lam2_pos hn htop
+  have hab' : a ≤ b := by
+    have := (hlo kp hkp0).2
+    rw [ha, hCp]
+    exact this
+  have hρ : ρ = (b - a) / (a + b) := by
+    simp only [ρ, ha, hb]
+    congr 1 <;> ring
+  have hden : 2 * (#S : ℝ) - Cp - Cm = a + b := by rw [ha, hb]; ring
+  obtain ⟨h0, h1, hconv⟩ := circulant_consensus hS ha0 hab' hlo
+  refine ⟨hlam, ha0, hρ ▸ h0, hρ ▸ h1, fun x => ?_, fun ε => ?_⟩
+  · rw [hden, hρ]
+    exact hconv x
+  · -- optimality: one of the two extreme modes decays no faster than `ρ`
+    have hs : 0 < a + b := by linarith
+    have hlb := rate_lower_bound (ε := ε) hs ha0.le hab' (ρ := ρ) (by rw [hρ]; field_simp)
+    have hρ0 : 0 ≤ ρ := hρ ▸ h0
+    have hpa : (#S : ℝ) - cSym S kp = a := by rw [ha, hCp]
+    have hmb : (#S : ℝ) - cSym S km = b := by rw [hb, hCm]
+    rcases le_total |1 - ε * a| |1 - ε * b| with hle | hle
+    · rw [max_eq_right hle] at hlb
+      obtain ⟨hne, hex⟩ := circulant_mode_exact hS hkm0 ε
+      refine ⟨cosMode km, hne, fun t => ?_⟩
+      rw [hex t, hmb]
+      refine mul_le_mul_of_nonneg_right ?_ (sqNorm_nonneg _)
+      refine pow_le_pow_left₀ (sq_nonneg _) ?_ t
+      rw [← sq_abs (1 - ε * b)]
+      exact pow_le_pow_left₀ hρ0 hlb 2
+    · rw [max_eq_left hle] at hlb
+      obtain ⟨hne, hex⟩ := circulant_mode_exact hS hkp0 ε
+      refine ⟨cosMode kp, hne, fun t => ?_⟩
+      rw [hex t, hpa]
+      refine mul_le_mul_of_nonneg_right ?_ (sqNorm_nonneg _)
+      refine pow_le_pow_left₀ (sq_nonneg _) ?_ t
+      rw [← sq_abs (1 - ε * a)]
+      exact pow_le_pow_left₀ hρ0 hlb 2
+
+/-- **Proposition 6.4 (iii): the disconnected case.**  If `gcd(D) ≠ 1`, then `X_n(D)` is disconnected,
+`λ₂ = 0`, and there is a non-constant initial vector that every constant-step iteration leaves
+fixed, so global consensus does not occur from it. -/
+theorem gcd_no_consensus (hn : 1 < n) {D : Finset ℕ} (hD : ProperDivisors n D)
+    (hgcd : D.gcd id ≠ 1) :
+    AddSubgroup.closure ((gcdSet n D : Finset (ZMod n)) : Set (ZMod n)) ≠ ⊤ ∧
+    lam2 (gcdSet n D) hn = 0 ∧
+    ∃ x : ZMod n → ℝ, err x ≠ 0 ∧
+      (∀ (ε : ℝ) (t : ℕ), (cStep (gcdSet n D) ε)^[t] x = x) ∧
+      ∀ ε : ℝ, ¬ Tendsto (fun t : ℕ => sqNorm (err ((cStep (gcdSet n D) ε)^[t] x))) atTop (𝓝 0) := by
+  have hnc : AddSubgroup.closure ((gcdSet n D : Finset (ZMod n)) : Set (ZMod n)) ≠ ⊤ :=
+    fun h => hgcd ((gcd_connected_iff hn hD).mp h)
+  set g := Nat.gcd (D.gcd id) n with hgdef
+  have hgn : g ∣ n := Nat.gcd_dvd_right _ _
+  have hg0 : g ≠ 0 := (Nat.gcd_pos_of_pos_right _ (Nat.pos_of_ne_zero (NeZero.ne n))).ne'
+  have hg1 : g ≠ 1 := by
+    intro h1
+    rcases D.eq_empty_or_nonempty with he | ⟨d, hd⟩
+    · rw [he, Finset.gcd_empty] at hgdef
+      rw [hgdef, Nat.gcd_zero_left] at h1
+      omega
+    · have : D.gcd id ∣ n := (Finset.gcd_dvd hd).trans (hD d hd).1
+      rw [hgdef, Nat.gcd_eq_left this] at h1
+      exact hgcd h1
+  have hgS : ∀ s ∈ gcdSet n D, g ∣ s.val := fun s hs =>
+    (Nat.gcd_dvd_left _ _).trans (dvd_val_of_mem_gcdSet hs)
+  obtain ⟨hz, hne, hfix⟩ := circulant_no_consensus (gcdSet_symm D) hn (by omega) hgn hgS
+  refine ⟨hnc, hz, subIndicator n g, hne, hfix, fun ε hlim => ?_⟩
+  have hconst : (fun t : ℕ => sqNorm (err ((cStep (gcdSet n D) ε)^[t] (subIndicator n g))))
+      = fun _ => sqNorm (err (subIndicator n g)) := by
+    funext t; rw [hfix ε t]
+  rw [hconst, tendsto_const_nhds_iff] at hlim
+  apply hne
+  funext j
+  have hzero := (sum_eq_zero_iff_of_nonneg (fun j _ => sq_nonneg (err (subIndicator n g) j))).mp
+    hlim j (mem_univ _)
+  simpa using hzero
+
+/-- **Example 6.5.**  For `n = 6` and `D = {2}` the gcd graph is two disjoint triangles:
+it is disconnected, `λ₂ = 0`, and consensus fails from a non-constant initial vector. -/
+theorem gcd_example_six_two :
+    AddSubgroup.closure ((gcdSet 6 {2} : Finset (ZMod 6)) : Set (ZMod 6)) ≠ ⊤ ∧
+    lam2 (gcdSet 6 {2}) (by norm_num) = 0 ∧
+    ∃ x : ZMod 6 → ℝ, err x ≠ 0 ∧ ∀ (ε : ℝ) (t : ℕ), (cStep (gcdSet 6 {2}) ε)^[t] x = x := by
+  have hD : ProperDivisors 6 {2} := by
+    intro d hd
+    rw [mem_singleton] at hd
+    subst hd
+    norm_num
+  have hg : ({2} : Finset ℕ).gcd id ≠ 1 := by simp
+  obtain ⟨h1, h2, x, hx, hfix, _⟩ := gcd_no_consensus (by norm_num) hD hg
+  exact ⟨h1, h2, x, hx, hfix⟩
 
 end ArithmeticDynamics

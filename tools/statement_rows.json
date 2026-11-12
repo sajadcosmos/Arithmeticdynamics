@@ -1,0 +1,386 @@
+[
+ {
+  "result": "(2.3), (2.4)",
+  "lean": [
+   {
+    "name": "ramanujan_eq"
+   },
+   {
+    "name": "lap_chi"
+   },
+   {
+    "name": "lap_eigenvalue"
+   }
+  ]
+ },
+ {
+  "result": "(2.5)",
+  "lean": [
+   {
+    "name": "fiber_sum_eq_ramanujan"
+   },
+   {
+    "name": "cSym_gcd_int"
+   }
+  ]
+ },
+ {
+  "result": "Lemma 3.1",
+  "lean": [
+   {
+    "name": "isLeast_divSet"
+   },
+   {
+    "name": "isGreatest_divSet_*"
+   },
+   {
+    "name": "r_eq_min_iff"
+   },
+   {
+    "name": "r_eq_max_iff"
+   }
+  ]
+ },
+ {
+  "result": "Theorem 3.2",
+  "lean": [
+   {
+    "name": "lapEig_le"
+   },
+   {
+    "name": "lapEig_ge_*"
+   },
+   {
+    "name": "card_lapEig_max"
+   },
+   {
+    "name": "card_lapEig_*"
+   }
+  ]
+ },
+ {
+  "result": "Corollary 3.3",
+  "lean": [
+   {
+    "name": "spectral_ratio"
+   },
+   {
+    "name": "spectral_ratio_formula"
+   }
+  ]
+ },
+ {
+  "result": "Lemma 4.1",
+  "lean": [
+   {
+    "name": "contraction_of_opt_step"
+   },
+   {
+    "name": "rate_lower_bound"
+   },
+   {
+    "name": "sqNorm_err_iterate"
+   }
+  ]
+ },
+ {
+  "result": "Theorem 4.3",
+  "lean": [
+   {
+    "name": "isRate_of_twoSmallest"
+   },
+   {
+    "name": "isRate_prime_pow"
+   },
+   {
+    "name": "isRate_prime"
+   },
+   {
+    "name": "opt_step_*"
+   },
+   {
+    "name": "consensus_of_isRate"
+   }
+  ]
+ },
+ {
+  "result": "Corollary 4.5",
+  "lean": [
+   {
+    "name": "rate_le_and_eq_iff"
+   },
+   {
+    "name": "consensus_three_fifths"
+   },
+   {
+    "name": "three_fifths_pow_le"
+   }
+  ]
+ },
+ {
+  "result": "Remark 4.6",
+  "lean": [
+   {
+    "name": "rate_strictAnti_q"
+   },
+   {
+    "name": "rate_tendsto_q"
+   },
+   {
+    "name": "rate_even"
+   },
+   {
+    "name": "rate_odd"
+   }
+  ]
+ },
+ {
+  "result": "Proposition 4.7",
+  "lean": [
+   {
+    "name": "natural_step_factor"
+   },
+   {
+    "name": "natural_step_lt_one_iff"
+   },
+   {
+    "name": "natural_step_even"
+   }
+  ]
+ },
+ {
+  "result": "Remark 4.8 (continuous time)",
+  "lean": [
+   {
+    "name": "continuous_consensus"
+   }
+  ]
+ },
+ {
+  "result": "Proposition 4.9",
+  "lean": [
+   {
+    "name": "mean_value"
+   },
+   {
+    "name": "density_inA"
+   },
+   {
+    "name": "density_inE_le"
+   }
+  ]
+ },
+ {
+  "result": "Lemma 5.2",
+  "lean": [
+   {
+    "name": "kuramotoField_twisted"
+   },
+   {
+    "name": "fderiv_kuramotoField"
+   },
+   {
+    "name": "jac_chi"
+   }
+  ]
+ },
+ {
+  "result": "Lemma 5.3",
+  "lean": [
+   {
+    "name": "g_one"
+   },
+   {
+    "name": "g_two"
+   },
+   {
+    "name": "g_four"
+   },
+   {
+    "name": "g_six"
+   },
+   {
+    "name": "g_ge"
+   }
+  ]
+ },
+ {
+  "result": "Theorem 5.4",
+  "lean": [
+   {
+    "name": "twisted_classification"
+   },
+   {
+    "name": "twisted_unstable_nonlinear",
+    "hyp": "H2"
+   }
+  ]
+ },
+ {
+  "result": "Theorem 5.5",
+  "lean": [
+   {
+    "name": "jac_hex"
+   },
+   {
+    "name": "jac_hex_five"
+   },
+   {
+    "name": "hex_spectrum"
+   },
+   {
+    "name": "hex_expStable",
+    "hyp": "H1"
+   },
+   {
+    "name": "hex_expStable_five",
+    "hyp": "H1"
+   },
+   {
+    "name": "sync_expStable",
+    "hyp": "H1"
+   }
+  ]
+ },
+ {
+  "result": "Theorem 5.6",
+  "lean": [
+   {
+    "name": "jac_quarter"
+   },
+   {
+    "name": "energy_quarter_kick"
+   },
+   {
+    "name": "energy_three_quarter_kick"
+   },
+   {
+    "name": "quarter_not_isLocalMin"
+   },
+   {
+    "name": "three_quarter_not_isLocalMin"
+   },
+   {
+    "name": "quarter_unstable",
+    "hyp": "H3"
+   }
+  ]
+ },
+ {
+  "result": "Corollary 5.7",
+  "lean": [
+   {
+    "name": "linearly_stable_iff"
+   },
+   {
+    "name": "exists_order_six_iff"
+   }
+  ]
+ },
+ {
+  "result": "Remarks in Section 5",
+  "lean": [
+   {
+    "name": "twistWeight_hex"
+   },
+   {
+    "name": "totient_le_third"
+   },
+   {
+    "name": "relative_degree_lt"
+   }
+  ]
+ },
+ {
+  "result": "Proposition 6.1",
+  "lean": [
+   {
+    "name": "circulant_unstable_linear"
+   },
+   {
+    "name": "circulant_unstable",
+    "hyp": "H2"
+   },
+   {
+    "name": "circulant_stable_linear"
+   }
+  ]
+ },
+ {
+  "result": "Proposition 6.2",
+  "lean": [
+   {
+    "name": "cJac_hex_gcd"
+   },
+   {
+    "name": "gcd_hex_expStable",
+    "hyp": "H1"
+   },
+   {
+    "name": "gcd_sync_expStable",
+    "hyp": "H1"
+   }
+  ]
+ },
+ {
+  "result": "Remark in Section 6",
+  "lean": [
+   {
+    "name": "cJac_quarter_gcd"
+   },
+   {
+    "name": "cos_hex_cases"
+   }
+  ]
+ },
+ {
+  "result": "Proposition 6.4(i)",
+  "lean": [
+   {
+    "name": "gcd_connected_iff"
+   },
+   {
+    "name": "lam2_pos_iff"
+   }
+  ]
+ },
+ {
+  "result": "Proposition 6.4(ii)",
+  "lean": [
+   {
+    "name": "gcd_rate"
+   },
+   {
+    "name": "ramanujan_int"
+   },
+   {
+    "name": "gcd_consensus"
+   },
+   {
+    "name": "circulant_consensus"
+   },
+   {
+    "name": "circulant_mode_exact"
+   }
+  ]
+ },
+ {
+  "result": "Proposition 6.4(iii)",
+  "lean": [
+   {
+    "name": "gcd_no_consensus"
+   },
+   {
+    "name": "circulant_no_consensus"
+   }
+  ]
+ },
+ {
+  "result": "Example 6.5",
+  "lean": [
+   {
+    "name": "gcd_example_six_two"
+   }
+  ]
+ }
+]
